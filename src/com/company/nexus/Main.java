@@ -8,6 +8,10 @@ public class Main {
         DelegationController controller = new DelegationController();
         controller.setChildService(true); controller.setPlayRoomService(true);
 
-        controller.printChildService(); controller.printPlayRoomService();
+
+        // operations
+        controller.save();
+        controller.get();
+
     }
 }

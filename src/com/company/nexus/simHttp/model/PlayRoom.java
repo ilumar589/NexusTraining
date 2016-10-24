@@ -9,24 +9,29 @@ import java.io.Serializable;
  */
 public class PlayRoom implements Serializable {
 
-    private Long id;
+    private final Long id; //required
 
-    private String roomName;
+    private final String roomName; //required
 
-    public Long getId() {
-        return id;
+    private PlayRoom(PlayRoomBuilder builder){
+        this.id = builder.id;
+        this.roomName = builder.roomName;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public static final class PlayRoomBuilder{
 
-    public String getRoomName() {
-        return roomName;
-    }
+        private final Long id;
 
-    public void setRoomName(String roomName) {
-        this.roomName = roomName;
+        private final String roomName;
+
+        public PlayRoomBuilder(Long id,String roomName){
+            this.id = id;
+            this.roomName = roomName;
+        }
+
+        public PlayRoom build(){
+            return new PlayRoom(this);
+        }
     }
 
     @Override
@@ -46,5 +51,13 @@ public class PlayRoom implements Serializable {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (roomName != null ? roomName.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "PlayRoom{" +
+                "id=" + id +
+                ", roomName='" + roomName + '\'' +
+                '}';
     }
 }

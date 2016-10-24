@@ -1,7 +1,9 @@
 package com.company.nexus.simHttp.controller;
 
+import com.company.nexus.simHttp.model.Child;
 import com.company.nexus.simHttp.service.impl.ChildService;
 import com.company.nexus.simHttp.service.impl.PlayRoomService;
+import com.company.nexus.util.FileOperations;
 import com.company.nexus.util.ReflectionFactory;
 
 /**
@@ -15,12 +17,12 @@ public class DelegationController{
 
     public DelegationController(){}
 
-    public void printChildService(){
-        childService.printServiceLocation();
+    public void save(){
+        childService.save();
     }
 
-    public void printPlayRoomService(){
-        playRoomService.printServiceLocation();
+    public void get(){
+        childService.get();
     }
 
     public void setChildService(Boolean singleton){

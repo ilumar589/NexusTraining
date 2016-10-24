@@ -7,47 +7,58 @@ import java.io.Serializable;
 /**
  * Created by WolframAlpha on 23/10/2016.
  */
+
+/**
+ *  Builder pattern for child model
+ */
+
 public class Child implements Serializable {
 
-    private Long id;
+    private final Long id; //required
 
-    private String name;
+    private final String name; //required
 
-    private String parentName;
+    private final String parentName; //optional
 
-    public Child(){}
-
-    public Child(Long id,
-                 String name,
-                 String parentName){
-
-        this.id = id;
-        this.name = name;
-        this.parentName = parentName;
+    private Child(ChildBuilder builder){
+        this.id = builder.id;
+        this.name = builder.name;
+        this.parentName = builder.parentName;
     }
+
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getParentName() {
         return parentName;
     }
 
-    public void setParentName(String parentName) {
-        this.parentName = parentName;
+    // static fields are not serialized so there is no need for the transient keyword
+    public static final class ChildBuilder {
+
+        private final Long id;
+        private final String name;
+        private String parentName;
+
+        public ChildBuilder(Long id, String name){
+            this.id = id;
+            this.name = name;
+        }
+
+        public ChildBuilder parentName(String parentName){
+            this.parentName = parentName;
+            return this;
+        }
+
+        public Child build(){
+            return new Child(this);
+        }
     }
 
     @Override
@@ -69,5 +80,10 @@ public class Child implements Serializable {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (parentName != null ? parentName.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return id + "#"  + name + "#" + parentName;
     }
 }
