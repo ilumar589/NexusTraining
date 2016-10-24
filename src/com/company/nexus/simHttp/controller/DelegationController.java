@@ -3,6 +3,7 @@ package com.company.nexus.simHttp.controller;
 import com.company.nexus.simHttp.model.Child;
 import com.company.nexus.simHttp.service.impl.ChildService;
 import com.company.nexus.simHttp.service.impl.PlayRoomService;
+import com.company.nexus.util.FactoryCreation;
 import com.company.nexus.util.FileOperations;
 import com.company.nexus.util.ReflectionFactory;
 
@@ -15,7 +16,10 @@ public class DelegationController{
 
     private PlayRoomService playRoomService;
 
-    public DelegationController(){}
+    public DelegationController(){
+        setChildService(true);
+        setPlayRoomService(true);
+    }
 
     public void save(){
         childService.save();
@@ -36,4 +40,5 @@ public class DelegationController{
         factory.setClass(PlayRoomService.class);
         this.playRoomService = factory.construct(singleton);
     }
+
 }
