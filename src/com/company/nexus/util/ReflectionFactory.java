@@ -9,7 +9,7 @@ import java.lang.reflect.Method;
  */
 public class ReflectionFactory<T extends FactoryCreation> {
 
-    private final String invocationMethodName = "getInstance";
+    private final String INVOCATION_METHOD_NAME = "getInstance";
 
     private Class<T> tClass;
 
@@ -21,7 +21,7 @@ public class ReflectionFactory<T extends FactoryCreation> {
 
     public T construct(Boolean singleton){
         try {
-            Method method = tClass.getMethod(invocationMethodName, Boolean.class);
+            Method method = tClass.getMethod(INVOCATION_METHOD_NAME, Boolean.class);
             return (T) method.invoke(null,singleton);
         }catch (NoSuchMethodException e) {
                 e.printStackTrace();
